@@ -25,8 +25,7 @@
 
 * Dans le fichier de configuration (etc/apache2/sites-avalaibles/monsite.local.conf) 
   ```sh
-  <VirtualHost *:80>
-    # nom de domaine personnalisé
+    <VirtualHost *:80>
     ServerName monsite.local
     Redirect permanent / https://monsite.local/
   </VirtualHost>
@@ -37,6 +36,7 @@
     SSLCertificateFile /etc/ssl/certs/monsite.local.crt
     SSLCertificateKeyFile /etc/ssl/private/monsite.local.key
   </VirtualHost>
+
   ```
 * Redirection 301 et 302 (Dans le VirtualHost 443)
   ```sh
@@ -44,17 +44,20 @@
   Redirect 302 /contact /nous-contacter
   ```
 
-* Activer le site
+* Activer le site (Dans le VirtualHost 443)
   ```sh
   sudo a2ensite monsite.local.conf
   sudo systemctl reload apache2
   ```
 
-* Logs séparés
+* Logs séparés (Dans le VirtualHost 443)
   ```sh
   ErrorLog ${APACHE_LOG_DIR}/monsite.local-error.log
   CustomLog ${APACHE_LOG_DIR}/monsite.local-access.log combined
   ```
+
+* Page 404 custom
+![curl 404](404.png)
 
 
 ## Exercice 2
