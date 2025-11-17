@@ -12,74 +12,39 @@
 <!-- CC2 -->
 ## Redirections
 
-* HTTP -> HTTPS
+* Générer le certificat auto-signé
   ```sh
-  sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout /etc/ssl/private/monsite.local.key \
-    -out /etc/ssl/certs/monsite.local.crt
-
+  sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/monsite.local.key -out /etc/ssl/certs/monsite.local.crt
   ```
 
-* Output
-  ```sh
-  .
-  ./.xsession-errors
-  ./.sudo_as_admin_successful
-  ./.bash_history
-  ./Music
-  ./.icons
-  ./.icons/uwuntu-welcome.png
-  ./Documents
-  ./Documents/cc22.md
-  ./Documents/cc2.md
-  ./Documents/fileFromSevenDaysAgo
-  ./Public
-  ./.lesshst
-  ./Desktop
-  ./.Xauthority
-  ./.profile
-  ./Videos
-  ./.bash_logout
-  ./.config
-  ./.config/fish
-  ./.config/fish/functions
-  ./.config/fish/functions/fish_greeting.fish
-  ./.config/fish/config.fish
-  ./.config/fish/completions
-  ./.config/fish/conf.d
-  ./.config/fish/conf.d/omf.fish
-  ./.config/fish/fish_variables
-  .local/share/gnome-settings-daemon/input-sources-converted
-  ./Downloads
-  ./Templates
-  ./Templates/LibreOffice Calc.ods
-  ./Templates/LibreOffice Impress.odp
-  ./Templates/MS Excel.xlsx
-  ./Templates/LibreOffice Writer.odt
-  ./Templates/LibreOffice Draw.odg
-  ./Templates/Text File.txt
-  ./Templates/MS Word.docx
-  ./Templates/Empty File
-  ./Templates/MS PowerPoint.pptx
-  ./.bashrc
-  ```  
+* Activer le module SSL
+    ```sh
+    sudo a2enmod ssl 
+    sudo sudo a2ensite default-ssl
+    ```  
 
-* Command 
+* Dans le fichier de configuration (etc/apache2/sites-avalaibles/monsite.local.conf) 
   ```sh
-  cat Documents/recent_files.txt | grep Ubuntu
+  <VirtualHost *:80>
+    ServerName monsite.local
+    Redirect permanent / https://monsite.local/
+  </VirtualHost>
+
+  <VirtualHost *:443>
+    ServerName monsite.local
+    SSLEngine on
+    SSLCertificateFile /etc/ssl/certs/monsite.local.crt
+    SSLCertificateKeyFile /etc/ssl/private/monsite.local.key
+  </VirtualHost>
   ```
-* Output
+* Redirection 301
   ```sh
-  none
+  RedirectMatch 301 ^/cours/(.*)$/ /formations/$1
   ```
 
-* Command 
+* Redirection 302 
   ```sh
-  cat Documents/recent_files.txt | grep uwuntu                                                                                                                                                                       1 (0.002s) < 10:- output :
-  ```
-* Output
-  ```sh
-  ./.icons/uwuntu-welcome.png
+  Redirect 302 /contact /nous-contacter
   ```
 
 ## Exercice 2
