@@ -20,7 +20,7 @@
     sudo a2enmod ssl 
     sudo a2ensite default-ssl
     ```  
-    [ssl](ssl.png)
+    ![ssl](ssl.png)
 
 * Dans le fichier de configuration (etc/apache2/sites-avalaibles/monsite.local.conf) 
   ```sh
@@ -42,8 +42,8 @@
   RedirectMatch 301 ^/cours/(.*)$/ /formations/$1
   Redirect 302 /contact /nous-contacter
   ```
-  [Redirect 301](redirect301.png)
-  [Redirect 302](redirect302.png)
+  ![Redirect 301](redirect301.png)
+  ![Redirect 302](redirect302.png)
 
 * Activer le site (Dans le VirtualHost 443)
   ```sh
