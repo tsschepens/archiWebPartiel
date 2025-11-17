@@ -8,7 +8,7 @@
 </div>
 
 
-## Redirections
+## Certificat SSL
 
 * Générer le certificat auto-signé
   ```sh
@@ -21,6 +21,8 @@
     sudo a2ensite default-ssl
     ```  
     ![ssl](ssl.png)
+
+## VirtualHost et Redirections
 
 * Dans le fichier de configuration (etc/apache2/sites-avalaibles/monsite.local.conf) 
   ```sh
@@ -51,11 +53,16 @@
   sudo systemctl reload apache2
   ```
 
+## Logs
+
 * Logs séparés (Dans le VirtualHost 443)
   ```sh
   ErrorLog ${APACHE_LOG_DIR}/monsite.local-error.log
   CustomLog ${APACHE_LOG_DIR}/monsite.local-access.log combined
   ```
+  ![Logs](logs.png)
+
+## Page 404
 
 * Page 404 custom (Toujours dans le VirtualHost 443)
   ```sh
