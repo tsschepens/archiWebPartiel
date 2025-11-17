@@ -20,7 +20,7 @@
     sudo a2enmod ssl 
     sudo a2ensite default-ssl
     ```  
-    ![ssl](ssl.png)
+    ![ssl](images/ssl.png)
 
 ## VirtualHost et Redirections
 
@@ -44,8 +44,8 @@
   RedirectMatch 301 ^/cours/(.*)$/ /formations/$1
   Redirect 302 /contact /nous-contacter
   ```
-  ![Redirect 301](redirect301.png)
-  ![Redirect 302](redirect302.png)
+  ![Redirect 301](images/redirect301.png)
+  ![Redirect 302](images/redirect302.png)
 
 * Activer le site (Dans le VirtualHost 443)
   ```sh
@@ -60,7 +60,7 @@
   ErrorLog ${APACHE_LOG_DIR}/monsite.local-error.log
   CustomLog ${APACHE_LOG_DIR}/monsite.local-access.log combined
   ```
-  ![Logs](logs.png)
+  ![Logs](images/logs.png)
 
 ## Page 404
 
@@ -68,5 +68,5 @@
   ```sh
   ErrorDocument 404 /404.html
   ```
-![curl 404](404.png)
+![curl 404](images/404.png)
 
